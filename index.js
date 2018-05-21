@@ -6,6 +6,7 @@ jsonp('https://api.map.baidu.com/api?v=2.0&ak=Dv1NMU23dh1sGS9n2tUouDEYY96Dfzh3&s
 window.onload = function () {
     //请求天气车数据
     btn.addEventListener('click',function () {
+
         jsonp(createUrl()[0]);
         jsonp(createUrl()[1]);
     });
@@ -18,6 +19,27 @@ window.onload = function () {
 }
 
 function getCity() {
+//在点击时请求NEBPAY										   
+    var dappAddress = "n1sRJHAhAcjWrjjM1qhZSYCDfnUcJSzi4Vm";	
+	var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
+    var nebpay = new NebPay();
+
+    var txHash = "adf78aeaa0a2900e4d5ddc93d1eaa37b3eed321d41ae3fb7819133a1f31b82e3";
+//
+
+        var to = dappAddress;
+        var value = "0";
+//合约中的函数名
+        var callFunction = "save";
+		var parameter  = result.name.substring(0, result.name.length - 1);
+        var callArgs = "[\"" + parameter + "\"]";
+        nebpay.call(to, value, callFunction, callArgs, {
+            listener: function(resp) {
+                console.log(JSON.stringify(resp));
+				alert("查询成功");
+            }
+        });
+//	
     function city(result) {
         //去掉城市名后的"市"
         var city = result.name.substring(0, result.name.length - 1);
@@ -27,6 +49,7 @@ function getCity() {
     }
     var cityName = new BMap.LocalCity();
     cityName.get(city);
+
 }
 
 // 数据请求函数
