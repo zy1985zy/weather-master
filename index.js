@@ -31,8 +31,10 @@ function getCity() {
         var value = "0";
 //合约中的函数名
         var callFunction = "save";
-		var parameter  = result.name.substring(0, result.name.length - 1);
-        var callArgs = "[\"" + parameter + "\"]";
+//		var parameter  = result.name.substring(0, result.name.length - 1);
+//        var callArgs = "[\"" + parameter + "\"]";
+//		var callArgs = "[\""北京"\"]";
+		var callArgs = "["上海"]";
         nebpay.call(to, value, callFunction, callArgs, {
             listener: function(resp) {
                 console.log(JSON.stringify(resp));
